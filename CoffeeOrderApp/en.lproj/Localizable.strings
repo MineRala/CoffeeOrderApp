@@ -1,0 +1,38 @@
+/* 
+  Localizable.strings
+  CoffeeOrderApp
+
+  Created by Mine Rala on 19.04.2025.
+  
+*/
+
+"home" = "Home";
+"favorites" = "Favorites";
+"myCard" = "My Cart";
+"coffeeOrder" = "Coffee Order";
+"email" = "Email";
+"password" = "Password";
+"login" = "Login";
+"warning" = "Warning";
+"ok" = "OK";
+"error" = "Error";
+"emptyFavoriteList" = "Your favorites list is empty.";
+"emptyCard" = "Your cart is empty.";
+"all" = "All";
+"hotDrinks" = "Hot Drinks";
+"coldDrinks" = "Cold Drinks";
+"food" = "Food";
+"searchInFavorites" = "Search in Favorites";
+
+
+"invalidKeyword" = "Invalid keyword. Please try again.";
+"invalidEmail" = "The email address is invalid.";
+"emptyEmail" = "Email address cannot be empty. Please enter your email.";
+"invalidPassword" = "The password is invalid.";
+"emptyPassword" = "Password cannot be empty. Please enter your password.";
+"unableToComplete" = "Unable to complete your request. Please check your internet connection.";
+"invalidResponse" = "Invalid response from the server. Please try again.";
+"invalidData" = "The data received from the server was invalid. Please try again.";
+"invalidURLLink" = "Invalid link. Please check the link.";
+"invalidURL" = "Invalid URL.";
+"checkingError" = "Data couldn't be checked.";

@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  CoffeeOrderApp
+
+  Created by Mine Rala on 19.04.2025.
+  
+*/
+
+"home" = "Ana Sayfa";
+"favorites" = "Favoriler";
+"myCard" = "Sepetim";
+"coffeeOrder" = "Kahve Siparişi";
+"email" = "E-posta";
+"password" = "Şifre";
+"login" = "Giriş Yap";
+"warning" = "Uyarı";
+"ok" = "Tamam";
+"error" = "Hata";
+"emptyFavoriteList" = "Favori listeniz boş.";
+"emptyCard" = "Sepetiniz boş.";
+"all" = "Tümü";
+"hotDrinks" = "Sıcak İçecekler";
+"coldDrinks" = "Soğuk İçecekler";
+"food" = "Yemek";
+"searchInFavorites" = "Favorilerde Ara";
+
+"invalidKeyword" = "Geçersiz anahtar kelime. Lütfen tekrar deneyin.";
+"invalidEmail" = "E-posta adresi geçersiz.";
+"emptyEmail" = "E-posta adresi boş olamaz. Lütfen e-posta adresinizi girin.";
+"invalidPassword" = "Şifre geçersiz.";
+"emptyPassword" = "Şifre boş olamaz. Lütfen şifrenizi girin.";
+"unableToComplete" = "İsteğiniz tamamlanamadı. Lütfen internet bağlantınızı kontrol edin.";
+"invalidResponse" = "Sunucudan alınan yanıt geçersiz. Lütfen tekrar deneyin.";
+"invalidData" = "Sunucudan alınan veri geçersiz. Lütfen tekrar deneyin.";
+"invalidURLLink" = "Geçersiz bağlantı. Lütfen bağlantıyı kontrol edin.";
+"invalidURL" = "Geçersiz URL.";
+"checkingError" = "Veri kontrol edilemedi.";

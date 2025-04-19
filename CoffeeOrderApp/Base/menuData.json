@@ -1,0 +1,117 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Hot Latte",
+      "category": "hotDrinks",
+      "price": 4.99,
+      "imageURL": "https://images.pexels.com/photos/2318017/pexels-photo-2318017.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+      "id": 2,
+      "name": "Cappuccino",
+      "category": "hotDrinks",
+      "price": 4.49,
+      "imageURL": "https://media.istockphoto.com/id/505168330/tr/foto%C4%9Fraf/cup-of-cafe-latte-with-coffee-beans-and-cinnamon-sticks.jpg?s=2048x2048&w=is&k=20&c=we6MrAH6bMytvHrDOXSpX7qsbQ8Y1i5_8VxTVTrru78="
+    },
+    {
+      "id": 3,
+      "name": "Espresso",
+      "category": "hotDrinks",
+      "price": 3.99,
+      "imageURL": "https://images.pexels.com/photos/685527/pexels-photo-685527.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+      "id": 4,
+      "name": "Mocha",
+      "category": "hotDrinks",
+      "price": 5.50,
+      "imageURL": "https://images.pexels.com/photos/350478/pexels-photo-350478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+      "id": 5,
+      "name": "Tea",
+      "category": "hotDrinks",
+      "price": 6.50,
+      "imageURL": "https://images.pexels.com/photos/905485/pexels-photo-905485.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+      "id": 6,
+      "name": "Iced Tea",
+      "category": "coldDrinks",
+      "price": 5.50,
+      "imageURL": "https://images.pexels.com/photos/1194030/pexels-photo-1194030.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+      "id": 7,
+      "name": "Green Tea",
+      "category": "coldDrinks",
+      "price": 5.00,
+      "imageURL": "https://images.pexels.com/photos/3090274/pexels-photo-3090274.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+      "id": 8,
+      "name": "Iced Coffee",
+      "category": "coldDrinks",
+      "price": 4.29,
+      "imageURL": "https://images.pexels.com/photos/1193335/pexels-photo-1193335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+      "id": 9,
+      "name": "Cold Brew",
+      "category": "coldDrinks",
+      "price": 4.89,
+      "imageURL": "https://cdn.pixabay.com/photo/2017/01/24/07/59/dutch-coffee-2004759_1280.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Strawberry Smoothie",
+      "category": "coldDrinks",
+      "price": 5.49,
+      "imageURL": "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3"
+    },
+    {
+      "id": 11,
+      "name": "Lemonade",
+      "category": "coldDrinks",
+      "price": 5.00,
+      "imageURL": "https://images.pexels.com/photos/2109099/pexels-photo-2109099.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+      "id": 12,
+      "name": "Tiramisu",
+      "category": "food",
+      "price": 6.99,
+      "imageURL": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3"
+    },
+    {
+      "id": 13,
+      "name": "Cheesecake",
+      "category": "food",
+      "price": 5.99,
+      "imageURL": "https://images.pexels.com/photos/19446144/pexels-photo-19446144/free-photo-of-lezzetli-sunger-kek.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+      "id": 14,
+      "name": "Chocolate Cake",
+      "category": "food",
+      "price": 5.49,
+      "imageURL": "https://images.unsplash.com/photo-1517427294546-5aa121f68e8a?q=80&w=1664&auto=format&fit=crop&ixlib=rb-4.0.3"
+    },
+    {
+      "id": 15,
+      "name": "Blueberry Muffin",
+      "category": "food",
+      "price": 3.99,
+      "imageURL": "https://images.unsplash.com/photo-1558303420-f814d8a590f5?q=80&w=1665&auto=format&fit=crop&ixlib=rb-4.0.3"
+    },
+    {
+      "id": 16,
+      "name": "Sandwich",
+      "category": "food",
+      "price": 6.50,
+      "imageURL": "https://images.pexels.com/photos/6529599/pexels-photo-6529599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    }
+  ]
+}
+
