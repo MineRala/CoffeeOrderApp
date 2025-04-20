@@ -90,7 +90,19 @@ This allows you to start using SnapKit for creating responsive layouts in your p
 # Demo
 https://github.com/user-attachments/assets/84c70774-6033-4c3a-8b36-8061e7c46374
 
-
+# Installation
+1. Clone the Repository
+Clone the project to your local machine using the following command in your terminal:
+```bash
+git clone https://github.com/MineRala/CoffeeOrderApp.git
+```
+2. Install Dependencies
+To install the third-party dependencies used in the project, run the following command:
+```bash
+swift package resolve
+```
+3. Open and Run the Project in Xcode
+Open the project in Xcode and run it by pressing Cmd + R.
 
 
 
