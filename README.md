@@ -52,7 +52,7 @@ This structure provides a modular and maintainable codebase by clearly separatin
 - Unit Tests
 
 # 3rd Party Libraries
-> <a href="https://github.com/SnapKit/SnapKit.git">SnapKit</a>\
+> <a href="https://github.com/SnapKit/SnapKit.git">SnapKit</a>
 
 # Installing SnapKit using Swift Package Manager (SPM)
 To integrate SnapKit into the project using Swift Package Manager, follow these steps:
