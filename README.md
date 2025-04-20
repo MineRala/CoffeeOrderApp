@@ -25,6 +25,7 @@ This structure provides a modular and maintainable codebase by clearly separatin
 # Features
 - Used Mock Json
 - List
+- Filter By Category
 - Search Bar
 - Favorites
 - My Card
