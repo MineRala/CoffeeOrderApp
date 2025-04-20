@@ -30,6 +30,7 @@ This structure provides a modular and maintainable codebase by clearly separatin
 - Favorites
 - My Card
 - Responsive UI
+- Localizable (Turkish + English)
 
 # Technologies
 - Programmatic UI (SnapKit)
@@ -49,6 +50,7 @@ This structure provides a modular and maintainable codebase by clearly separatin
 - Depedency Injection
 - Singelton
 - Manuel Caching Image Mechanism (CacheManager)
+- Localizable
 - Unit Tests
 
 # 3rd Party Libraries
