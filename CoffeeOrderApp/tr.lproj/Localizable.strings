@@ -23,6 +23,18 @@
 "coldDrinks" = "Soğuk İçecekler";
 "food" = "Yemek";
 "searchInFavorites" = "Favorilerde Ara";
+"addToCart" = "Sepete Ekle";
+"total" = "Toplam: ";
+"addedCard" = "Ürün sepete eklendi 🎉";
+"quantitiy" = "Miktar: ";
+"totalWith" = "Toplam: $";
+"placeAnOrder" = "Sipariş Ver";
+"placeAnOrder" = "Place An Order";
+"areYouSureDelete" = "Bu ürünü sepetinizden silmek istediğinizden emin misiniz?";
+"yes" = "Evet";
+"no" = "Hayır";
+"successOrder" = "Siparişiniz başarıyla verildi! ";
+
 
 "invalidKeyword" = "Geçersiz anahtar kelime. Lütfen tekrar deneyin.";
 "invalidEmail" = "E-posta adresi geçersiz.";

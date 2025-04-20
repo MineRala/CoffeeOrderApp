@@ -23,7 +23,16 @@
 "coldDrinks" = "Cold Drinks";
 "food" = "Food";
 "searchInFavorites" = "Search in Favorites";
-
+"addToCart" = "Add to Cart";
+"total" = "Total: ";
+"addedCard" = "Item added to cart 🎉";
+"quantitiy" = "Quantitiy: ";
+"totalWith" = "Total: $";
+"placeAnOrder" = "Place Order";
+"areYouSureDelete" = "Are you sure you want to delete this product from your cart?";
+"yes" = "Yes";
+"no" = "No";
+"successOrder" = "Your order has been placed successfully!";
 
 "invalidKeyword" = "Invalid keyword. Please try again.";
 "invalidEmail" = "The email address is invalid.";

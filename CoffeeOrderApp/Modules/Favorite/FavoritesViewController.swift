@@ -112,6 +112,7 @@ extension FavoritesViewController {
 extension FavoritesViewController {
     private func addNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshFavorites(_:)), name: .favoriteItemUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showAddToast(_:)), name: .cartItemAdded, object: nil)
     }
 
     private func fetchFavorites() {
@@ -147,6 +148,18 @@ extension FavoritesViewController {
         guard let updatedItem = notification.object as? MenuItem else { return }
         viewModel.refreshFavorites(with: updatedItem)
     }
+
+    @objc private func showAddToast(_ notification: Notification) {
+        showSnackBar(message: AppString.addedCard.localized)
+    }
+}
+
+// MARK: - Present
+extension FavoritesViewController {
+    private func navigateToDetailViewController(with item: MenuItem) {
+        let detailVC = DetailViewController(menuItem: item)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -174,7 +187,7 @@ extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let favoriteItem = viewModel.getFavorite(index: indexPath.row)
-        // Favori öğesi seçildiğinde yapılacak işlem (örneğin, detay ekranına gitme)
+        navigateToDetailViewController(with: favoriteItem)
         print("Selected favorite item: \(favoriteItem.name)")
     }
 }

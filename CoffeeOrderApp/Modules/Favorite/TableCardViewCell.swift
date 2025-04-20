@@ -50,7 +50,7 @@ class TableCardViewCell: UITableViewCell {
 
     private let favoriteButton: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = 18
         button.layer.masksToBounds = true
         button.backgroundColor = .lightGray
         button.setImage(Images.heartFill, for: .normal)
@@ -71,11 +71,22 @@ class TableCardViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        itemNameLabel.text = nil
+        itemPriceLabel.text = nil
+        itemImageView.image = nil
+        favoriteButton.backgroundColor = .lightGray
+    }
 }
 
 // MARK: - UI
 extension TableCardViewCell {
     private func setupUI() {
+        self.selectedBackgroundView = UIView()
+        self.selectionStyle = .none
+        
         contentView.addSubview(cardView)
         cardView.addSubview(itemImageView)
         cardView.addSubview(itemNameLabel)
@@ -129,9 +140,8 @@ extension TableCardViewCell {
 
         updateFavoriteButton()
 
-        favoriteButton.removeTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside) // Eski target'ı temizleyin
-        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside) // Yeni target ekleyin
-
+        favoriteButton.removeTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
     }
 
     private func updateFavoriteButton() {

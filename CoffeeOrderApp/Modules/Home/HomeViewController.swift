@@ -186,6 +186,7 @@ extension HomeViewController {
 extension HomeViewController {
     private func addNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshFavorites(_:)), name: .favoriteItemUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showAddToast(_:)), name: .cartItemAdded, object: nil)
     }
 }
 
@@ -209,6 +210,18 @@ extension HomeViewController {
         guard let updatedItem = notification.object as? MenuItem else { return }
         viewModel.refreshFavorites(updatedItem: updatedItem)
     }
+
+    @objc private func showAddToast(_ notification: Notification) {
+        showSnackBar(message: AppString.addedCard.localized)
+    }
+}
+
+// MARK: - Present
+extension HomeViewController {
+    private func navigateToDetailViewController(with item: MenuItem) {
+        let detailVC = DetailViewController(menuItem: item)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -216,12 +229,20 @@ extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.filteredMenuItemsCount
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let menuItem = viewModel.getItem(index: indexPath.row)
+        navigateToDetailViewController(with: menuItem)
+        print("Selected menu item: \(menuItem.name)")
+       }
 }
 
 // MARK: - UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AppString.collectionCardCell, for: indexPath) as! CollectionCardViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AppString.collectionCardCell, for: indexPath) as? CollectionCardViewCell else {
+            return UICollectionViewCell()
+        }
         let menuItem = viewModel.getItem(index: indexPath.row)
         cell.configure(with: menuItem)
         return cell

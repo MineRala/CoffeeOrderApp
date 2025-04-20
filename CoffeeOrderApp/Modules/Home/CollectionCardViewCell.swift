@@ -32,7 +32,7 @@ class CollectionCardViewCell: UICollectionViewCell {
 
     private let favoriteButton: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = 18
         button.layer.masksToBounds = true
         button.backgroundColor = .lightGray
         button.setImage(Images.heartFill, for: .normal)
@@ -69,6 +69,15 @@ class CollectionCardViewCell: UICollectionViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        itemNameLabel.text = nil
+        priceLabel.text = nil
+        itemImageView.image = nil
+        favoriteButton.backgroundColor = .lightGray
+
     }
 
     private func setupUI() {

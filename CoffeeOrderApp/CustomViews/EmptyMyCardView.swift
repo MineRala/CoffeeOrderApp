@@ -5,56 +5,52 @@
 //  Created by Mine Rala on 19.04.2025.
 //
 
+
 import UIKit
+import SnapKit
 
-class EmptyView: UIView {
-
-    private lazy var emptyIcon: UIImageView = {
-        let imageView = UIImageView(image: Images.squareGrid)
-        imageView.tintColor = .systemGray
+final class EmptyMyCardView: UIView {
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = Images.cardFill
+        imageView.tintColor = .systemGray3
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
-    private lazy var emptyLabel: UILabel = {
+    private let messageLabel: UILabel = {
         let label = UILabel()
         label.text = AppString.emptyCard.localized
-        label.textColor = .systemGray
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        label.textColor = .systemGray
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         label.numberOfLines = 0
         return label
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        setupUI()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupView()
+        setupUI()
     }
 
-    private func setupView() {
-        self.addSubview(emptyIcon)
-        self.addSubview(emptyLabel)
+    private func setupUI() {
+        addSubview(imageView)
+        addSubview(messageLabel)
 
-        emptyIcon.snp.makeConstraints { make in
+        imageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(40)
+            make.centerY.equalToSuperview().offset(-40)
             make.width.height.equalTo(60)
         }
 
-        emptyLabel.snp.makeConstraints { make in
-            make.top.equalTo(emptyIcon.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
+        messageLabel.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(16)
             make.left.right.equalToSuperview().inset(20)
         }
-    }
-
-    func configure(message: String, iconName: String) {
-        emptyLabel.text = message
-        emptyIcon.image = UIImage(systemName: iconName)
     }
 }

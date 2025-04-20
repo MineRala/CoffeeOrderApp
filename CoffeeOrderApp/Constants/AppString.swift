@@ -13,11 +13,13 @@ enum AppString {
     static let favoriteItem = "FavoriteItem"
     static let favoriteItemCell = "FavoriteItemCell"
     static let collectionCardCell = "CollectionCardViewCell"
+    static let cardItemCell = "CartTableViewCell"
     static let coffeeApp = "coffeeApp"
     static let menuData = "menuData"
     static let banner1 = "banner1"
     static let banner2 = "banner2"
     static let banner3 = "banner3"
+    static let cartItemAdded = "cartItemAdded"
 
     // UI
     static let home = "home"
@@ -37,6 +39,21 @@ enum AppString {
     static let coldDrinks = "coldDrinks"
     static let food = "food"
     static let searchInFavorites = "searchInFavorites"
+    static let addToCart = "addToCart"
+    static let total = "total"
+    static let addedCard = "addedCard"
+    static let quantitiy = "quantitiy"
+    static let totalWith = "totalWith"
+    static let placeAnOrder = "placeAnOrder"
+    static let areYouSureDelete = "areYouSureDelete"
+    static let yes = "yes"
+    static let no = "no"
+    static let successOrder = "successOrder"
+
+    // Other
+    static let decrease = "-"
+    static let increase = "+"
+    static let one = "1"
 
 //    // AppError
 //
