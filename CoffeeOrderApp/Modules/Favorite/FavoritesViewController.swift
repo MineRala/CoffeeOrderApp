@@ -157,7 +157,7 @@ extension FavoritesViewController {
 // MARK: - Present
 extension FavoritesViewController {
     private func navigateToDetailViewController(with item: MenuItem) {
-        let detailVC = DetailViewController(menuItem: item)
+        let detailVC = DetailViewController(viewModel: DetailViewModel(menuItem: item, userDefaultsManager: self.viewModel.userDefaultsManager))
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

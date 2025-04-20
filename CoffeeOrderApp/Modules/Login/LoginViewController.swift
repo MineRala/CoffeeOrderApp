@@ -130,7 +130,7 @@ extension LoginViewController {
 // MARK: - Present
 extension LoginViewController {
     private func navigateToHome() {
-        let tabBarController = TabBarBuilder.build(keychainManager: viewModel.keychainManager, networkManager: viewModel.networkManager)
+        let tabBarController = TabBarBuilder.build(keychainManager: viewModel.keychainManager, networkManager: viewModel.networkManager, userDefaultsManager: viewModel.userDefaultsManager)
         tabBarController.modalPresentationStyle = .fullScreen
         self.present(tabBarController, animated: true, completion: nil)
     }

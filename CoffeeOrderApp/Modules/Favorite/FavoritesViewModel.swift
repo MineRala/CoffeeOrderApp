@@ -8,6 +8,8 @@
 import Foundation
 
 protocol FavoritesViewModelProtocol {
+    var userDefaultsManager: UserDefaultsProtocol { get }
+
     var filteredFavoritesCount: Int { get }
     var heightForRowAt: CGFloat { get }
 
@@ -25,8 +27,14 @@ final class FavoritesViewModel {
     private var filteredFavorites: [MenuItem] = []
     private var allFavorites: [MenuItem] = []
 
+    public let userDefaultsManager: UserDefaultsProtocol
+
     var onFavoritesRemoved: ((Int) -> Void)?
     var onReloadData: (() -> Void)?
+
+    init(userDefaultsManager: UserDefaultsProtocol) {
+        self.userDefaultsManager = userDefaultsManager
+    }
 }
 
 // MARK: - FavoritesViewModel
@@ -40,7 +48,6 @@ extension FavoritesViewModel {
 
 // MARK: - FavoritesViewModelProtocol
 extension FavoritesViewModel: FavoritesViewModelProtocol {
-
     var filteredFavoritesCount: Int {
         filteredFavorites.count
 

@@ -10,6 +10,7 @@ import Foundation
 protocol HomeViewModelProtocol {
     var networkManager: NetworkManagerProtocol { get }
     var keychainManager: KeychainManagerProtocol { get }
+    var userDefaultsManager: UserDefaultsProtocol { get }
     var delegate: HomeViewModelDelegate? { get set }
 
     var filteredMenuItemsCount: Int { get }
@@ -39,11 +40,13 @@ final class HomeViewModel {
 
     public let keychainManager: KeychainManagerProtocol
     public let networkManager: NetworkManagerProtocol
+    public let userDefaultsManager: UserDefaultsProtocol
     public weak var delegate: HomeViewModelDelegate?
 
-    init(keychainManager: KeychainManagerProtocol, networkManager: NetworkManagerProtocol) {
+    init(keychainManager: KeychainManagerProtocol, networkManager: NetworkManagerProtocol, userDefaultsManager: UserDefaultsProtocol) {
         self.keychainManager = keychainManager
         self.networkManager = networkManager
+        self.userDefaultsManager = userDefaultsManager
     }
 
 }

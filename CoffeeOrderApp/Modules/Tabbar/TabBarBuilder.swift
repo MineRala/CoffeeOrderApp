@@ -11,18 +11,18 @@ import UIKit
 struct TabBarBuilder {
 
     // NetworkManager'ı dışarıdan almak için initializer'ı değiştiriyoruz.
-    static func build(keychainManager: KeychainManagerProtocol, networkManager: NetworkManagerProtocol) -> UITabBarController {
+    static func build(keychainManager: KeychainManagerProtocol, networkManager: NetworkManagerProtocol, userDefaultsManager: UserDefaultsProtocol) -> UITabBarController {
         let tabBarController = UITabBarController()
         let appearance = UITabBar.appearance()
         appearance.tintColor = .systemPurple
         appearance.unselectedItemTintColor = .gray
         appearance.backgroundColor = .white
 
-        let homeViewModel = HomeViewModel(keychainManager: keychainManager, networkManager: networkManager)
+        let homeViewModel = HomeViewModel(keychainManager: keychainManager, networkManager: networkManager, userDefaultsManager: userDefaultsManager)
         let homeVC = HomeViewController(viewModel: homeViewModel)
-        let favoritesViewModel = FavoritesViewModel()
+        let favoritesViewModel = FavoritesViewModel(userDefaultsManager: userDefaultsManager)
         let favoritesVC = FavoritesViewController(viewModel: favoritesViewModel)
-        let cartVC = CartViewController()
+        let cartVC = CartViewController(userDefaults: userDefaultsManager)
 
         let homeNav = UINavigationController(rootViewController: homeVC)
         let favoritesNav = UINavigationController(rootViewController: favoritesVC)

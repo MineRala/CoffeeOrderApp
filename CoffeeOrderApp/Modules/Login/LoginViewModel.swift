@@ -10,6 +10,7 @@ import Foundation
 protocol LoginViewModelProtocol {
     var keychainManager: KeychainManagerProtocol { get }
     var networkManager: NetworkManagerProtocol { get }
+    var userDefaultsManager: UserDefaultsProtocol { get }
     var delegate: LoginViewModelDelegate? { get set }
 
     func login(email: String, password: String)
@@ -23,11 +24,13 @@ protocol LoginViewModelDelegate: AnyObject {
 final class LoginViewModel {
     public let keychainManager: KeychainManagerProtocol
     public let networkManager: NetworkManagerProtocol
+    public let userDefaultsManager: UserDefaultsProtocol
     public weak var delegate: LoginViewModelDelegate?
 
-    init(keychainManager: KeychainManagerProtocol, networkManager: NetworkManagerProtocol) {
+    init(keychainManager: KeychainManagerProtocol, networkManager: NetworkManagerProtocol, userDefaultsManager: UserDefaultsProtocol) {
         self.keychainManager = keychainManager
         self.networkManager = networkManager
+        self.userDefaultsManager = userDefaultsManager
     }
 }
 

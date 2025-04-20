@@ -85,6 +85,7 @@ final class CartTableViewCell: UITableViewCell {
     }()
 
     private var currentItem: CartItem?
+    private var userDefaults: UserDefaultsProtocol?
 
     // MARK: - Init
 
@@ -135,7 +136,8 @@ final class CartTableViewCell: UITableViewCell {
 
     // MARK: - Configure Cell
 
-    func configure(with item: CartItem) {
+    func configure(with item: CartItem, userDefaults: UserDefaultsProtocol? = nil) {
+        self.userDefaults = userDefaults
         currentItem = item
         nameLabel.text = item.name
         priceLabel.text = "$\(String(format: "%.2f", item.price))"
@@ -165,7 +167,13 @@ final class CartTableViewCell: UITableViewCell {
         if var items = UserDefaultsManager().loadCartItems(),
            let index = items.firstIndex(where: { $0.id == item.id }) {
             items[index] = item
-            UserDefaultsManager().saveCartItems(items)
+
+            guard let userDefaults = userDefaults else {
+                assertionFailure("UserDefaults dependency is missing!")
+                return
+            }
+            
+            userDefaults.saveCartItems(items)
             NotificationCenter.default.post(name: .cartUpdated, object: nil)
         }
         configure(with: item)
@@ -175,7 +183,13 @@ final class CartTableViewCell: UITableViewCell {
         if var items = UserDefaultsManager().loadCartItems(),
            let index = items.firstIndex(where: { $0.id == item.id }) {
             items.remove(at: index)
-            UserDefaultsManager().saveCartItems(items)
+
+            guard let userDefaults = userDefaults else {
+                assertionFailure("UserDefaults dependency is missing!")
+                return
+            }
+
+            userDefaults.saveCartItems(items)
             NotificationCenter.default.post(name: .cartUpdated, object: nil)
         }
     }

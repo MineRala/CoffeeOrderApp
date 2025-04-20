@@ -57,7 +57,17 @@ final class CartViewController: UIViewController {
     }()
 
     private var cartItems: [CartItem] = []
+    private var userDefaults: UserDefaultsProtocol
 
+    init(userDefaults: UserDefaultsProtocol) {
+           self.userDefaults = userDefaults
+           super.init(nibName: nil, bundle: nil)
+       }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,7 +145,7 @@ extension CartViewController {
 // MARK: - Logic
 extension CartViewController {
     private func loadCartItems() {
-        if let items = UserDefaultsManager().loadCartItems() {
+        if let items = userDefaults.loadCartItems() {
             updateCartItems(with: items)
         }
     }
@@ -153,7 +163,7 @@ extension CartViewController {
     }
 
     @objc private func orderButtonTapped() {
-        UserDefaultsManager().clearAllItems()
+        userDefaults.clearAllItems()
 
         cartItems.removeAll()
         tableView.reloadData()
@@ -172,7 +182,7 @@ extension CartViewController {
     private func deleteItem(at indexPath: IndexPath) {
         cartItems.remove(at: indexPath.row)
 
-        UserDefaultsManager().saveCartItems(cartItems)
+        userDefaults.saveCartItems(cartItems)
 
         NotificationCenter.default.post(name: .cartUpdated, object: nil)
 
@@ -246,7 +256,7 @@ extension CartViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let item = cartItems[indexPath.row]
-        cell.configure(with: item)
+        cell.configure(with: item, userDefaults: UserDefaultsManager())
         return cell
     }
 }

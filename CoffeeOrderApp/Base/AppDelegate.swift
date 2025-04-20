@@ -19,13 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let keychainManager = KeychainManager()
         let networkManager = NetworkManager()
+            let userDefaultsManager = UserDefaultsManager()
 
         let initialViewController: UIViewController
 
         if keychainManager.isUserLoggedIn() {
-            initialViewController = TabBarBuilder.build(keychainManager: keychainManager, networkManager: networkManager)
+            initialViewController = TabBarBuilder.build(keychainManager: keychainManager, networkManager: networkManager, userDefaultsManager: userDefaultsManager)
         } else {
-            let loginViewModel = LoginViewModel(keychainManager: keychainManager, networkManager: networkManager)
+            let loginViewModel = LoginViewModel(keychainManager: keychainManager, networkManager: networkManager, userDefaultsManager: userDefaultsManager)
             let loginViewController = LoginViewController(viewModel: loginViewModel)
             initialViewController = UINavigationController(rootViewController: loginViewController)
         }

@@ -7,7 +7,16 @@
 
 import Foundation
 
-class UserDefaultsManager {
+protocol UserDefaultsProtocol {
+    func saveCartItems(_ items: [CartItem])
+    func loadCartItems() -> [CartItem]?
+    func removeItem(at index: Int)
+    func isEmpty() -> Bool
+    func clearAllItems()
+}
+
+
+class UserDefaultsManager: UserDefaultsProtocol {
     private let cartKey = "cartItems"
 
     func saveCartItems(_ items: [CartItem]) {
@@ -39,12 +48,7 @@ class UserDefaultsManager {
 
     func clearAllItems() {
         UserDefaults.standard.removeObject(forKey: cartKey)
-        UserDefaults.standard.synchronize()
-        if loadCartItems() == nil {
-            print("Cart items cleared successfully")
-        } else {
-            print("Cart items not cleared")
-        }
+        UserDefaults.standard.set([], forKey: cartKey)
     }
 }
 

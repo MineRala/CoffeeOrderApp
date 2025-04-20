@@ -134,13 +134,13 @@ final class DetailViewController: UIViewController {
         return stackView
     }()
 
-    private var menuItem: MenuItem?
-    private var quantity: Int = 1
+    private var viewModel: DetailViewModelProtocol
 
     // MARK: - Initializer
-    init(menuItem: MenuItem) {
-        self.menuItem = menuItem
+    init(viewModel: DetailViewModelProtocol) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.viewModel.delegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -155,7 +155,7 @@ final class DetailViewController: UIViewController {
     }
 }
 
-// MARK: - UI Setup
+// MARK: - UI
 extension DetailViewController {
     private func setupUI() {
         navigationItem.hidesBackButton = true
@@ -217,19 +217,25 @@ extension DetailViewController {
         }
     }
 
-    // MARK: - Config Method
     private func configure() {
-        guard let item = menuItem else { return }
-        nameLabel.text = item.name
-        priceLabel.text = "$\(item.price)"
+        nameLabel.text = viewModel.getMenuItem().name
+        priceLabel.text = "$\(viewModel.getMenuItem().price)"
         updateTotalPrice()
 
-        CacheManager.shared.loadImage(from: item.imageURL) { [weak self] image in
-            guard let self = self else { return }
+        CacheManager.shared.loadImage(from: viewModel.getMenuItem().imageURL) { [weak self] image in
+            guard let self else { return }
             if let image = image {
                 self.imageView.image = image
             }
         }
+    }
+}
+
+// MARK: - Helpers
+extension DetailViewController {
+    private func updateTotalPrice() {
+        let total = viewModel.getTotalPrice()
+        totalPriceLabel.text = "$\(String(format: "%.2f", total))"
     }
 }
 
@@ -240,43 +246,30 @@ extension DetailViewController {
     }
 
     @objc private func increaseQuantity() {
-        quantity += 1
-        quantityLabel.text = "\(quantity)"
+        viewModel.increaseQuantity()
+        quantityLabel.text = "\(viewModel.getQuantitityCount())"
         updateTotalPrice()
     }
 
     @objc private func decreaseQuantity() {
-        if quantity > 1 {
-            quantity -= 1
-            quantityLabel.text = "\(quantity)"
+        if viewModel.isQuantityGraterThanOne() {
+            viewModel.decreaseQuantitiy()
+            quantityLabel.text = "\(viewModel.getQuantitityCount())"
             updateTotalPrice()
+
         }
     }
 
     @objc private func addToCart() {
-        guard let item = menuItem else { return }
+        viewModel.addToCart()
+    }
+}
 
-        let cartItem = CartItem(id: item.id, name: item.name, price: item.price, quantity: quantity)
-        var cartItems = UserDefaultsManager().loadCartItems() ?? []
 
-        if let index = cartItems.firstIndex(where: { $0.id == cartItem.id }) {
-            cartItems[index].quantity += cartItem.quantity
-        } else {
-            cartItems.append(cartItem)
-        }
-
-        UserDefaultsManager().saveCartItems(cartItems)
-
-        NotificationCenter.default.post(name: .cartUpdated, object: nil)
-
-        NotificationCenter.default.post(name: .cartItemAdded, object: item.name)
-
+// MARK:
+extension DetailViewController: DetailViewModelDelegate {
+    func popVC() {
         navigationController?.popViewController(animated: true)
     }
 
-    private func updateTotalPrice() {
-        guard let item = menuItem else { return }
-        let total = item.price * Double(quantity)
-        totalPriceLabel.text = "$\(String(format: "%.2f", total))"
-    }
 }
