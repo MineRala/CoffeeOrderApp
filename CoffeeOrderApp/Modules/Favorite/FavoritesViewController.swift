@@ -68,6 +68,7 @@ final class FavoritesViewController: UIViewController {
 extension FavoritesViewController {
     private func setupUI() {
         view.backgroundColor = .white
+        navigationItem.title = AppString.favorites.localized
         setupSearchBar()
         setupTableView()
         setupFavoriteEmptyView()
@@ -102,7 +103,7 @@ extension FavoritesViewController {
     }
 
     private func updateViewVisibility() {
-        let hasFavorites = viewModel.filteredFavoritesCount > 0
+        let hasFavorites = viewModel.allFavoritesCount > 0
         favoritesTableView.isHidden = !hasFavorites
         emptyView.isHidden = hasFavorites
     }
@@ -157,7 +158,7 @@ extension FavoritesViewController {
 // MARK: - Present
 extension FavoritesViewController {
     private func navigateToDetailViewController(with item: MenuItem) {
-        let detailVC = DetailViewController(viewModel: DetailViewModel(menuItem: item, userDefaultsManager: self.viewModel.userDefaultsManager))
+        let detailVC = DetailViewController(viewModel: DetailViewModel(menuItem: item, userDefaultsManager: self.viewModel.userDefaultsManager, cacheManager: self.viewModel.cacheManager))
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
@@ -173,7 +174,7 @@ extension FavoritesViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let favorite = viewModel.getFavorite(index: indexPath.row)
-        cell.configure(with: favorite)
+        cell.configure(with: favorite, cacheManager: viewModel.cacheManager, coreDataManager: viewModel.coreDataManager)
         return cell
     }
 }

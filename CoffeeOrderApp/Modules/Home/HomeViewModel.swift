@@ -11,6 +11,8 @@ protocol HomeViewModelProtocol {
     var networkManager: NetworkManagerProtocol { get }
     var keychainManager: KeychainManagerProtocol { get }
     var userDefaultsManager: UserDefaultsProtocol { get }
+    var cacheManager: CacheManagerProtocol { get }
+    var coreDataManager: CoreDataManagerProtocol { get }
     var delegate: HomeViewModelDelegate? { get set }
 
     var filteredMenuItemsCount: Int { get }
@@ -41,12 +43,17 @@ final class HomeViewModel {
     public let keychainManager: KeychainManagerProtocol
     public let networkManager: NetworkManagerProtocol
     public let userDefaultsManager: UserDefaultsProtocol
+    public let cacheManager: CacheManagerProtocol
+    public let coreDataManager: CoreDataManagerProtocol
+
     public weak var delegate: HomeViewModelDelegate?
 
-    init(keychainManager: KeychainManagerProtocol, networkManager: NetworkManagerProtocol, userDefaultsManager: UserDefaultsProtocol) {
+    init(keychainManager: KeychainManagerProtocol, networkManager: NetworkManagerProtocol, userDefaultsManager: UserDefaultsProtocol, cacheManager: CacheManagerProtocol, coreDataManager: CoreDataManagerProtocol = CoreDataManager.shared) {
         self.keychainManager = keychainManager
         self.networkManager = networkManager
         self.userDefaultsManager = userDefaultsManager
+        self.cacheManager = cacheManager
+        self.coreDataManager = coreDataManager
     }
 
 }

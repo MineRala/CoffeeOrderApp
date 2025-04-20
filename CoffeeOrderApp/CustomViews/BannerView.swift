@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BannerView: UIView, UIScrollViewDelegate {
+final class BannerView: UIView, UIScrollViewDelegate {
 
     private let bannerScrollView: UIScrollView = {
         let scrollView = UIScrollView()

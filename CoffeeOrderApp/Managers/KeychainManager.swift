@@ -56,7 +56,6 @@ final class KeychainManager {
         SecItemDelete(query)
     }
 
-
 }
 
 // MARK: - KeychainManagerProtocol

@@ -5,7 +5,6 @@
 //  Created by Mine Rala on 19.04.2025.
 //
 
-
 import UIKit
 import SnapKit
 

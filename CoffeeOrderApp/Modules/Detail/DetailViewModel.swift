@@ -6,11 +6,12 @@
 //
 
 import Foundation
-
+import Combine
 
 protocol DetailViewModelProtocol {
     var userDefaultsManager: UserDefaultsProtocol { get }
-    var delegate: DetailViewModelDelegate? { get set }
+    var cacheManager: CacheManagerProtocol { get }
+    var popVCPublisher: AnyPublisher<Void, Never> { get }
 
     func increaseQuantity()
     func decreaseQuantitiy()
@@ -21,24 +22,26 @@ protocol DetailViewModelProtocol {
     func getMenuItem() -> MenuItem
 }
 
-protocol DetailViewModelDelegate: AnyObject {
-    func popVC()
-}
-
 final class DetailViewModel {
     public let userDefaultsManager: UserDefaultsProtocol
+    public let cacheManager: CacheManagerProtocol
     private var menuItem: MenuItem
     private var quantity: Int = 1
-    public weak var delegate: DetailViewModelDelegate?
+    let popVCSubject = PassthroughSubject<Void, Never>()
 
-    init(menuItem: MenuItem, userDefaultsManager: UserDefaultsProtocol) {
+    init(menuItem: MenuItem, userDefaultsManager: UserDefaultsProtocol, cacheManager: CacheManagerProtocol) {
         self.menuItem = menuItem
         self.userDefaultsManager = userDefaultsManager
+        self.cacheManager = cacheManager
     }
 }
 
 // MARK: - DetailViewModelProtocol
 extension DetailViewModel: DetailViewModelProtocol {
+    var popVCPublisher: AnyPublisher<Void, Never> {
+        popVCSubject.eraseToAnyPublisher()
+    }
+
     func increaseQuantity() {
         quantity += 1
     }
@@ -74,7 +77,8 @@ extension DetailViewModel: DetailViewModelProtocol {
 
         NotificationCenter.default.post(name: .cartItemAdded, object: menuItem.name)
 
-        self.delegate?.popVC()
+        popVCSubject.send()
+
     }
 
     func getMenuItem() -> MenuItem {

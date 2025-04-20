@@ -20,6 +20,7 @@ enum AppString {
     static let banner2 = "banner2"
     static let banner3 = "banner3"
     static let cartItemAdded = "cartItemAdded"
+    static let cartUpdated = "cartUpdated"
 
     // UI
     static let home = "home"
@@ -49,6 +50,7 @@ enum AppString {
     static let yes = "yes"
     static let no = "no"
     static let successOrder = "successOrder"
+    static let detail = "detail"
 
     // Other
     static let decrease = "-"

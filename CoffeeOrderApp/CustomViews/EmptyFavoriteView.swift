@@ -5,8 +5,6 @@
 //  Created by Mine Rala on 19.04.2025.
 //
 
-import Foundation
-
 import UIKit
 import SnapKit
 

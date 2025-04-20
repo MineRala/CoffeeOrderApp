@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class TableCardViewCell: UITableViewCell {
+final class TableCardViewCell: UITableViewCell {
     // MARK: - UI Elements
     private lazy var cardView: UIView = {
         let view = UIView()
@@ -60,6 +60,7 @@ class TableCardViewCell: UITableViewCell {
     }()
 
     private var menuItem: MenuItem?
+    private var coreDataManager: CoreDataManagerProtocol?
 
 
     // MARK: - Initializer
@@ -126,17 +127,22 @@ extension TableCardViewCell {
 
 // MARK: - Configure Cell
 extension TableCardViewCell {
-    func configure(with item: MenuItem) {
+    func configure(with item: MenuItem, cacheManager: CacheManagerProtocol?, coreDataManager: CoreDataManagerProtocol?) {
         self.menuItem = item
+        self.coreDataManager = coreDataManager
+
         itemNameLabel.text = item.name
         itemPriceLabel.text = "$\(item.price)"
 
-        CacheManager.shared.loadImage(from: item.imageURL) { [weak self] image in
-            guard let self else { return }
-            if let image {
-                self.itemImageView.image = image
+        if let cacheManager {
+            cacheManager.loadImage(from: item.imageURL) { [weak self] image in
+                guard let self else { return }
+                if let image {
+                    self.itemImageView.image = image
+                }
             }
         }
+
 
         updateFavoriteButton()
 
@@ -145,8 +151,8 @@ extension TableCardViewCell {
     }
 
     private func updateFavoriteButton() {
-        if let menuItem {
-            favoriteButton.backgroundColor = CoreDataManager.shared.isFavorite(id: menuItem.id) ? .purple : .lightGray
+        if let menuItem, let coreDataManager {
+            favoriteButton.backgroundColor = coreDataManager.isFavorite(id: menuItem.id) ? .purple : .lightGray
         }
 
     }
@@ -155,8 +161,8 @@ extension TableCardViewCell {
 // MARK: - Actions
 extension TableCardViewCell {
     @objc private func favoriteButtonTapped() {
-        if let menuItem {
-            CoreDataManager.shared.toggleFavorite(item: menuItem)
+        if let menuItem, let coreDataManager {
+            coreDataManager.toggleFavorite(item: menuItem)
 
             let isFav = CoreDataManager.shared.isFavorite(id: menuItem.id)
             let newColor: UIColor = isFav ? .purple : .lightGray

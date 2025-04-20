@@ -8,7 +8,6 @@
 import UIKit
 
 final class LoginViewController: UIViewController {
-
     // MARK: - UI Elements
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -130,7 +129,7 @@ extension LoginViewController {
 // MARK: - Present
 extension LoginViewController {
     private func navigateToHome() {
-        let tabBarController = TabBarBuilder.build(keychainManager: viewModel.keychainManager, networkManager: viewModel.networkManager, userDefaultsManager: viewModel.userDefaultsManager)
+        let tabBarController = TabBarBuilder.build(keychainManager: viewModel.keychainManager, networkManager: viewModel.networkManager, userDefaultsManager: viewModel.userDefaultsManager, cacheManager: viewModel.cacheManager)
         tabBarController.modalPresentationStyle = .fullScreen
         self.present(tabBarController, animated: true, completion: nil)
     }

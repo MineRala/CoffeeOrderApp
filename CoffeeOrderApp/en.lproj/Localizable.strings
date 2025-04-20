@@ -22,7 +22,7 @@
 "hotDrinks" = "Hot Drinks";
 "coldDrinks" = "Cold Drinks";
 "food" = "Food";
-"searchInFavorites" = "Search in Favorites";
+"searchInFavorites" = "Search by product name in favorites";
 "addToCart" = "Add to Cart";
 "total" = "Total: ";
 "addedCard" = "Item added to cart 🎉";
@@ -33,6 +33,7 @@
 "yes" = "Yes";
 "no" = "No";
 "successOrder" = "Your order has been placed successfully!";
+"detail" = "Product Detail";
 
 "invalidKeyword" = "Invalid keyword. Please try again.";
 "invalidEmail" = "The email address is invalid.";

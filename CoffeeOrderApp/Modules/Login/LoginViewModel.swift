@@ -11,6 +11,7 @@ protocol LoginViewModelProtocol {
     var keychainManager: KeychainManagerProtocol { get }
     var networkManager: NetworkManagerProtocol { get }
     var userDefaultsManager: UserDefaultsProtocol { get }
+    var cacheManager: CacheManagerProtocol { get }
     var delegate: LoginViewModelDelegate? { get set }
 
     func login(email: String, password: String)
@@ -25,12 +26,14 @@ final class LoginViewModel {
     public let keychainManager: KeychainManagerProtocol
     public let networkManager: NetworkManagerProtocol
     public let userDefaultsManager: UserDefaultsProtocol
+    public let cacheManager: CacheManagerProtocol
     public weak var delegate: LoginViewModelDelegate?
 
-    init(keychainManager: KeychainManagerProtocol, networkManager: NetworkManagerProtocol, userDefaultsManager: UserDefaultsProtocol) {
+    init(keychainManager: KeychainManagerProtocol, networkManager: NetworkManagerProtocol, userDefaultsManager: UserDefaultsProtocol, cacheManager: CacheManagerProtocol) {
         self.keychainManager = keychainManager
         self.networkManager = networkManager
         self.userDefaultsManager = userDefaultsManager
+        self.cacheManager = cacheManager
     }
 }
 

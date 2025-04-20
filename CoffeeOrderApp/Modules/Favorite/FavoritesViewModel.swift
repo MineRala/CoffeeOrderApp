@@ -9,8 +9,11 @@ import Foundation
 
 protocol FavoritesViewModelProtocol {
     var userDefaultsManager: UserDefaultsProtocol { get }
+    var cacheManager: CacheManagerProtocol { get }
+    var coreDataManager: CoreDataManagerProtocol { get }
 
     var filteredFavoritesCount: Int { get }
+    var allFavoritesCount: Int { get }
     var heightForRowAt: CGFloat { get }
 
     func fetchFavorites(text: String)
@@ -28,19 +31,23 @@ final class FavoritesViewModel {
     private var allFavorites: [MenuItem] = []
 
     public let userDefaultsManager: UserDefaultsProtocol
+    public let cacheManager: CacheManagerProtocol
+    public var coreDataManager: CoreDataManagerProtocol
 
     var onFavoritesRemoved: ((Int) -> Void)?
     var onReloadData: (() -> Void)?
 
-    init(userDefaultsManager: UserDefaultsProtocol) {
+    init(userDefaultsManager: UserDefaultsProtocol, cacheManager: CacheManagerProtocol, coreDataManager: CoreDataManagerProtocol = CoreDataManager.shared) {
         self.userDefaultsManager = userDefaultsManager
+        self.cacheManager = cacheManager
+        self.coreDataManager = coreDataManager
     }
 }
 
 // MARK: - FavoritesViewModel
 extension FavoritesViewModel {
     private func convertMenuItem() -> [MenuItem] {
-        return CoreDataManager.shared.fetchFavorites().map { item in
+        return coreDataManager.fetchFavorites().map { item in
             MenuItem(id: Int(item.id), name: item.name ?? "", category: item.category ?? "", price: item.price, imageURL: item.imageURL ?? "")
         }
     }
@@ -48,6 +55,10 @@ extension FavoritesViewModel {
 
 // MARK: - FavoritesViewModelProtocol
 extension FavoritesViewModel: FavoritesViewModelProtocol {
+    var allFavoritesCount: Int {
+        allFavorites.count
+    }
+    
     var filteredFavoritesCount: Int {
         filteredFavorites.count
 

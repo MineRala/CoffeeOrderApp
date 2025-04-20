@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomAlertView: UIView {
+final class CustomAlertView: UIView {
 
     private lazy var alertBackgroundView: UIView = {
         let view = UIView()

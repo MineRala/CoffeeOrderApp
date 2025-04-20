@@ -56,12 +56,12 @@ final class CartViewController: UIViewController {
         return button
     }()
 
-    private var cartItems: [CartItem] = []
-    private var userDefaults: UserDefaultsProtocol
+    private var viewModel: CartViewModelProtcol
 
-    init(userDefaults: UserDefaultsProtocol) {
-           self.userDefaults = userDefaults
+    init(viewModel: CartViewModelProtcol) {
+        self.viewModel = viewModel
            super.init(nibName: nil, bundle: nil)
+        self.viewModel.delegate = self
        }
     
     required init?(coder: NSCoder) {
@@ -72,8 +72,8 @@ final class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        loadCartItems()
-        updateViewVisibility(isEmpty: cartItems.isEmpty)
+        viewModel.loadCardItems()
+        updateViewVisibility(isEmpty: viewModel.isEmptyCardItems())
         addNotificationObserver()
     }
 
@@ -86,6 +86,7 @@ final class CartViewController: UIViewController {
 extension CartViewController {
     private func setupUI() {
         view.backgroundColor = .white
+        navigationItem.title = AppString.cart.localized
 
         view.addSubview(emptyView)
         view.addSubview(tableView)
@@ -124,18 +125,6 @@ extension CartViewController {
         }
     }
 
-    func updateVisibiltyState() {
-        if cartItems.isEmpty {
-            updateViewVisibility(isEmpty: true)
-            orderButton.isEnabled = false
-            orderButton.backgroundColor = .gray
-        } else {
-            updateViewVisibility(isEmpty: false)
-            orderButton.isEnabled = true
-            orderButton.backgroundColor = .purple
-        }
-    }
-
     func updateViewVisibility(isEmpty: Bool) {
         emptyView.isHidden = !isEmpty
         tableView.isHidden = isEmpty
@@ -144,57 +133,33 @@ extension CartViewController {
 
 // MARK: - Logic
 extension CartViewController {
-    private func loadCartItems() {
-        if let items = userDefaults.loadCartItems() {
-            updateCartItems(with: items)
-        }
-    }
-
     private func addNotificationObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateCartView), name: .cartUpdated, object: nil)
     }
-
 }
 
 // MARK: - Actions
 extension CartViewController {
     @objc private func updateCartView() {
-        loadCartItems()
+        viewModel.loadCardItems()
     }
 
     @objc private func orderButtonTapped() {
-        userDefaults.clearAllItems()
+        viewModel.orderButtonTapped()
 
-        cartItems.removeAll()
-        tableView.reloadData()
-        updateVisibiltyState()
-        updateTotalPrice()
-        
         let successView = OrderSuccessView(frame: .zero)
         successView.show(in: self.view)
     }
-
-
 }
 
 // MARK: - Helpers
 extension CartViewController {
-    private func deleteItem(at indexPath: IndexPath) {
-        cartItems.remove(at: indexPath.row)
-
-        userDefaults.saveCartItems(cartItems)
-
-        NotificationCenter.default.post(name: .cartUpdated, object: nil)
-
-        updateTotalPrice()
-    }
-
     private func showDeleteConfirmationAlert(at indexPath: IndexPath) {
         let alertView = CustomAlertView(frame: view.bounds)
 
         alertView.onYesTapped = { [weak self] in
             guard let self else { return }
-            self.deleteItem(at: indexPath)
+            viewModel.deleteItem(at: indexPath.row)
         }
 
         alertView.onNoTapped = {
@@ -203,29 +168,13 @@ extension CartViewController {
 
         view.addSubview(alertView)
     }
-
-    private func updateCartItems(with items: [CartItem]) {
-        cartItems = items
-        updateVisibiltyState()
-        tableView.reloadData()
-        updateTotalPrice()
-    }
-
-    private func updateTotalPrice() {
-        let totalPrice = cartItems.reduce(0) { total, item in
-            let itemTotal = item.price * Double(item.quantity)
-            return total + itemTotal
-        }
-
-        totalPriceLabel.text = "\(AppString.totalWith.localized)\(String(format: "%.2f", totalPrice))"
-    }
 }
 
 // MARK: - UITableViewDelegate
 extension CartViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cartItems.count
+        return viewModel.cartItemsCount
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -255,8 +204,35 @@ extension CartViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AppString.cardItemCell, for: indexPath) as? CartTableViewCell else {
             return UITableViewCell()
         }
-        let item = cartItems[indexPath.row]
+        let item = viewModel.getCartItem(index: indexPath.row)
         cell.configure(with: item, userDefaults: UserDefaultsManager())
         return cell
     }
+}
+
+// MARK: - CardViewModelDelegate
+extension CartViewController: CartViewModelDelegate {
+    func updateVisibiltyState() {
+        if viewModel.isEmptyCardItems() {
+            updateViewVisibility(isEmpty: true)
+            orderButton.isEnabled = false
+            orderButton.backgroundColor = .gray
+        } else {
+            updateViewVisibility(isEmpty: false)
+            orderButton.isEnabled = true
+            orderButton.backgroundColor = .purple
+        }
+    }
+    
+    func reloadData() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+
+    func setTotalPriceLabel(with text: String) {
+        totalPriceLabel.text = text
+    }
+
+
 }

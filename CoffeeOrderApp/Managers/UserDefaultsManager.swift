@@ -16,7 +16,7 @@ protocol UserDefaultsProtocol {
 }
 
 
-class UserDefaultsManager: UserDefaultsProtocol {
+final class UserDefaultsManager: UserDefaultsProtocol {
     private let cartKey = "cartItems"
 
     func saveCartItems(_ items: [CartItem]) {

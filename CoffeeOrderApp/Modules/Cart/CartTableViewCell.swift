@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 final class CartTableViewCell: UITableViewCell {
-
     // MARK: - UI Components
 
     private lazy var containerView: UIView = {
@@ -88,7 +87,6 @@ final class CartTableViewCell: UITableViewCell {
     private var userDefaults: UserDefaultsProtocol?
 
     // MARK: - Init
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()

@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 final class DetailViewController: UIViewController {
     // MARK:  Properties
@@ -135,12 +136,12 @@ final class DetailViewController: UIViewController {
     }()
 
     private var viewModel: DetailViewModelProtocol
+    private var subscriptions = Set<AnyCancellable>()
 
     // MARK: - Initializer
     init(viewModel: DetailViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.viewModel.delegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -152,6 +153,7 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         configure()
+        bindViewModel()
     }
 }
 
@@ -159,6 +161,7 @@ final class DetailViewController: UIViewController {
 extension DetailViewController {
     private func setupUI() {
         navigationItem.hidesBackButton = true
+        navigationItem.title = AppString.detail.localized
         view.backgroundColor = .white
         view.addSubview(imageView)
         view.addSubview(nameLabel)
@@ -222,12 +225,25 @@ extension DetailViewController {
         priceLabel.text = "$\(viewModel.getMenuItem().price)"
         updateTotalPrice()
 
-        CacheManager.shared.loadImage(from: viewModel.getMenuItem().imageURL) { [weak self] image in
+        viewModel.cacheManager.loadImage(from: viewModel.getMenuItem().imageURL) { [weak self] image in
             guard let self else { return }
             if let image = image {
                 self.imageView.image = image
             }
         }
+    }
+}
+
+// MARK: - Private
+extension DetailViewController {
+    private func bindViewModel() {
+        viewModel.popVCPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                guard let self else { return }
+                self.navigationController?.popViewController(animated: true)
+            }
+            .store(in: &subscriptions)
     }
 }
 
@@ -263,13 +279,4 @@ extension DetailViewController {
     @objc private func addToCart() {
         viewModel.addToCart()
     }
-}
-
-
-// MARK:
-extension DetailViewController: DetailViewModelDelegate {
-    func popVC() {
-        navigationController?.popViewController(animated: true)
-    }
-
 }

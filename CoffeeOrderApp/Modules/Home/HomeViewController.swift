@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
 
     // MARK:  Properties
     private lazy var bannerView: BannerView = {
@@ -80,6 +80,7 @@ extension HomeViewController {
     }
 
     private func setupNavigationBar() {
+        navigationItem.title = AppString.home.localized
         navigationItem.rightBarButtonItem = logoutButton
     }
 
@@ -219,7 +220,7 @@ extension HomeViewController {
 // MARK: - Present
 extension HomeViewController {
     private func navigateToDetailViewController(with item: MenuItem) {
-        let detailVC = DetailViewController(viewModel: DetailViewModel(menuItem: item, userDefaultsManager: self.viewModel.userDefaultsManager))
+        let detailVC = DetailViewController(viewModel: DetailViewModel(menuItem: item, userDefaultsManager: self.viewModel.userDefaultsManager, cacheManager: self.viewModel.cacheManager))
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
@@ -244,7 +245,7 @@ extension HomeViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let menuItem = viewModel.getItem(index: indexPath.row)
-        cell.configure(with: menuItem)
+        cell.configure(with: menuItem, cacheManager: viewModel.cacheManager, coreDataManager: viewModel.coreDataManager)
         return cell
     }
 }
@@ -256,7 +257,7 @@ extension HomeViewController: HomeViewModelDelegate {
     }
 
     func didLogoutSuccessfully() {
-        let loginViewModel = LoginViewModel(keychainManager: self.viewModel.keychainManager, networkManager: self.viewModel.networkManager, userDefaultsManager: self.viewModel.userDefaultsManager)
+        let loginViewModel = LoginViewModel(keychainManager: self.viewModel.keychainManager, networkManager: self.viewModel.networkManager, userDefaultsManager: self.viewModel.userDefaultsManager, cacheManager: self.viewModel.cacheManager)
            let loginVC = LoginViewController(viewModel: loginViewModel)
            let navController = UINavigationController(rootViewController: loginVC)
 

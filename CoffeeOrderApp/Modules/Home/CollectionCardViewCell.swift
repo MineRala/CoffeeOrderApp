@@ -6,8 +6,8 @@
 //
 
 import UIKit
-class CollectionCardViewCell: UICollectionViewCell {
 
+final class CollectionCardViewCell: UICollectionViewCell {
     private let cardView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -61,6 +61,7 @@ class CollectionCardViewCell: UICollectionViewCell {
     }()
 
     private var menuItem: MenuItem?
+    private var coreDataManager: CoreDataManagerProtocol?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -115,34 +116,36 @@ class CollectionCardViewCell: UICollectionViewCell {
         }
     }
 
-    func configure(with item: MenuItem) {
+    func configure(with item: MenuItem, cacheManager: CacheManagerProtocol?, coreDataManager: CoreDataManagerProtocol?) {
         self.menuItem = item
+        self.coreDataManager = coreDataManager
 
         itemNameLabel.text = item.name
         priceLabel.text = "$\(item.price)"
 
-        CacheManager.shared.loadImage(from: item.imageURL) { [weak self] image in
-            guard let self = self else { return }
-            if let image = image {
-                self.itemImageView.image = image
+        if let cacheManager {
+            cacheManager.loadImage(from: item.imageURL) { [weak self] image in
+                guard let self = self else { return }
+                if let image = image {
+                    self.itemImageView.image = image
+                }
             }
         }
-
         updateFavoriteButton()
     }
 
     private func updateFavoriteButton() {
-        if let menuItem {
-            favoriteButton.backgroundColor = CoreDataManager.shared.isFavorite(id: menuItem.id) ? .purple : .lightGray
+        if let menuItem, let coreDataManager{
+            favoriteButton.backgroundColor = coreDataManager.isFavorite(id: menuItem.id) ? .purple : .lightGray
         }
 
     }
 
     @objc private func favoriteButtonTapped() {
-        if let menuItem {
-            CoreDataManager.shared.toggleFavorite(item: menuItem)
+        if let menuItem, let coreDataManager {
+            coreDataManager.toggleFavorite(item: menuItem)
 
-            let isFav = CoreDataManager.shared.isFavorite(id: menuItem.id)
+            let isFav = coreDataManager.isFavorite(id: menuItem.id)
             let newColor: UIColor = isFav ? .purple : .lightGray
 
             UIView.animate(withDuration: 0.2,

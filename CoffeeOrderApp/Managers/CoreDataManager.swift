@@ -7,7 +7,7 @@
 import CoreData
 import UIKit
 
-protocol CoreDataServiceProtocol {
+protocol CoreDataManagerProtocol {
     func saveFavorite(item: MenuItem)
     func removeFavorite(id: Int)
     func isFavorite(id: Int) -> Bool
@@ -15,7 +15,7 @@ protocol CoreDataServiceProtocol {
     func fetchFavorites() -> [FavoriteItem]
 }
 
-final class CoreDataManager: CoreDataServiceProtocol {
+final class CoreDataManager: CoreDataManagerProtocol {
     static let shared = CoreDataManager()
 
     private let persistentContainer: NSPersistentContainer
