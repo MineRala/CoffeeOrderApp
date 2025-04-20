@@ -76,7 +76,7 @@ This allows you to start using SnapKit for creating responsive layouts in your p
 
 # UIs
 <img src="https://github.com/user-attachments/assets/9a8636a7-bb55-4726-a6b1-f09b1fa733c3" alt="splash" width="150">
-<img src="https://github.com/user-attachments/assets/6a0421f8-2425-43e0-8320-5bfe12c92b27" alt="login" width="150">
+<img src="https://github.com/user-attachments/assets/646d44e2-7d0e-43f1-a952-d330fe52dcc4" alt="login" width="150">
 <img src="https://github.com/user-attachments/assets/32147567-7269-4454-b5e2-5a670aea5bbc" alt="home" width="150">
 <img src="https://github.com/user-attachments/assets/9d3dd093-d210-43e5-ba31-7ab6d42096b7" alt="detail" width="150">
 <img src="https://github.com/user-attachments/assets/ac2bd96e-aa5f-4906-b161-32ccf30ed49b" alt="favorite" width="150">
