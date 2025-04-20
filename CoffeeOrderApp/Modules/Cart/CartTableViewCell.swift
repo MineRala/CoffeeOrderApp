@@ -140,7 +140,7 @@ final class CartTableViewCell: UITableViewCell {
         nameLabel.text = item.name
         priceLabel.text = "$\(String(format: "%.2f", item.price))"
         quantityLabel.text = "\(item.quantity)"
-        totalPriceLabel.text = "\(AppString.totalWith.localized) $\(String(format: "%.2f", item.price * Double(item.quantity)))"
+        totalPriceLabel.text = "\(AppString.totalWith.localized)\(String(format: "%.2f", item.price * Double(item.quantity)))"
     }
 
     // MARK: - Actions
