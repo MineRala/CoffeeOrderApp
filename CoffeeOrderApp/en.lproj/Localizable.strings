@@ -25,7 +25,7 @@
 "searchInFavorites" = "Search by product name in favorites";
 "addToCart" = "Add to Cart";
 "total" = "Total: ";
-"addedCard" = "Item added to cart 🎉";
+"addedCard" = "Product added to cart 🎉";
 "quantitiy" = "Quantitiy: ";
 "totalWith" = "Total: $";
 "placeAnOrder" = "Place Order";
