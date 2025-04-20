@@ -39,6 +39,7 @@ This structure provides a modular and maintainable codebase by clearly separatin
 - Error Handling
 - Tabbar
 - Page Control
+- Animations
 - Protocol Oriented Programming (POP)
 - Notification Center
 - Delegate
