@@ -14,25 +14,24 @@ enum MockError: Error {
 
 final class MockNetworkManager: NetworkManagerProtocol {
     var shouldReturnError = false
+    var loadLocalJSONResult: Result<Any, AppError> = .failure(.invalidData)
 
     func loadLocalJSON<T: Decodable>(filename: String, type: T.Type, completion: @escaping (Result<T, AppError>) -> Void) {
-        if shouldReturnError {
-            completion(.failure(.invalidData))
-        } else {
-            let mockData: [String: Any] = ["id": 1, "name": "Coffee", "category": "Hot Drinks", "price": 5.0, "imageURL": "coffee_image_url"]
-
-            // Assuming we are dealing with a model like MenuItem
-            if let jsonData = try? JSONSerialization.data(withJSONObject: mockData, options: []) {
-                do {
-                    let decodedData = try JSONDecoder().decode(T.self, from: jsonData)
-                    completion(.success(decodedData))
-                } catch {
-                    completion(.failure(.invalidData))
-                }
-            } else {
+        switch loadLocalJSONResult {
+        case .success(let data):
+            // Güvenli bir şekilde data'yı Data tipine dönüştürme
+            guard let jsonData = data as? Data else {
+                completion(.failure(.invalidData))
+                return
+            }
+            do {
+                let decodedData = try JSONDecoder().decode(T.self, from: jsonData)
+                completion(.success(decodedData))
+            } catch {
                 completion(.failure(.invalidData))
             }
+        case .failure(let error):
+            completion(.failure(error))
         }
     }
 }
-

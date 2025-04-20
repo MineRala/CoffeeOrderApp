@@ -9,7 +9,6 @@ import XCTest
 @testable import CoffeeOrderApp
 
 final class NetworkManagerTests: XCTestCase {
-
     var mockNetworkManager: MockNetworkManager!
 
     override func setUp() {
@@ -24,11 +23,14 @@ final class NetworkManagerTests: XCTestCase {
 
     func testLoadLocalJSON_Successful() {
         // Given
-        let filename = "menuItem"
-        mockNetworkManager.shouldReturnError = false
+        let menuItem = MenuItem(id: 1, name: "Coffee", category: "Hot Drinks", price: 5.0, imageURL: "coffee_image_url")
+        let mockData: [String: Any] = ["id": 1, "name": "Coffee", "category": "Hot Drinks", "price": 5.0, "imageURL": "coffee_image_url"]
+        if let jsonData = try? JSONSerialization.data(withJSONObject: mockData, options: []) {
+            mockNetworkManager.loadLocalJSONResult = .success(jsonData)
+        }
 
         // When
-        mockNetworkManager.loadLocalJSON(filename: filename, type: MenuItem.self) { result in
+        mockNetworkManager.loadLocalJSON(filename: "menuItem", type: MenuItem.self) { result in
             // Then
             switch result {
             case .success(let menuItem):
@@ -45,11 +47,10 @@ final class NetworkManagerTests: XCTestCase {
 
     func testLoadLocalJSON_Failure() {
         // Given
-        let filename = "menuItem"
-        mockNetworkManager.shouldReturnError = true
+        mockNetworkManager.loadLocalJSONResult = .failure(.invalidData)
 
         // When
-        mockNetworkManager.loadLocalJSON(filename: filename, type: MenuItem.self) { result in
+        mockNetworkManager.loadLocalJSON(filename: "menuItem", type: MenuItem.self) { result in
             // Then
             switch result {
             case .success:

@@ -14,7 +14,7 @@ final class LoginViewController: UIViewController {
         label.text = AppString.coffeeOrder.localized
         label.font = UIFont.systemFont(ofSize: 36, weight: .heavy)
         label.textAlignment = .center
-        label.textColor = UIColor.systemPurple
+        label.textColor = UIColor.purple
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -31,7 +31,7 @@ final class LoginViewController: UIViewController {
         textField.layer.borderWidth = 0.5
         textField.delegate = self
         textField.returnKeyType = .next
-        textField.layer.borderColor = UIColor.systemPurple.cgColor
+        textField.layer.borderColor = UIColor.purple.cgColor
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -47,7 +47,7 @@ final class LoginViewController: UIViewController {
         textField.delegate = self
         textField.returnKeyType = .done
         textField.layer.borderWidth = 0.5
-        textField.layer.borderColor = UIColor.systemPurple.cgColor
+        textField.layer.borderColor = UIColor.purple.cgColor
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -55,7 +55,7 @@ final class LoginViewController: UIViewController {
     private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(AppString.login.localized, for: .normal)
-        button.backgroundColor = UIColor.systemPurple
+        button.backgroundColor = UIColor.purple
         button.layer.cornerRadius = 12
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitleColor(.white, for: .normal)

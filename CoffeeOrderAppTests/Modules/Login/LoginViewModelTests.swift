@@ -41,7 +41,6 @@ final class LoginViewModelTests: XCTestCase {
         super.tearDown()
     }
 
-    // Test: Boş e-posta ile giriş
     func testLogin_EmptyEmail() {
         // Given
         let email = ""
@@ -50,26 +49,24 @@ final class LoginViewModelTests: XCTestCase {
         // When: login fonksiyonu çağrılır
         viewModel.login(email: email, password: password)
 
-        // Then: loginDidFail çağrılmalıdır
+        // Then
         XCTAssertTrue(mockDelegate.loginDidFailCalled)
         XCTAssertEqual(mockDelegate.loginError, .emptyEmail)
 
-        // Keychain'e kaydedilmemiş olmalı
         XCTAssertFalse(mockKeychainManager.saveCredentialsCalled)
         XCTAssertNil(mockKeychainManager.storedEmail)
         XCTAssertNil(mockKeychainManager.storedPassword)
     }
 
-    // Test: Boş şifre ile giriş
     func testLogin_EmptyPassword() {
         // Given
         let email = "test@example.com"
         let password = ""
 
-        // When: login fonksiyonu çağrılır
+        // When
         viewModel.login(email: email, password: password)
 
-        // Then: loginDidFail çağrılmalıdır
+        // Then
         XCTAssertTrue(mockDelegate.loginDidFailCalled)
         XCTAssertEqual(mockDelegate.loginError, .emptyPassword)
 
@@ -79,57 +76,51 @@ final class LoginViewModelTests: XCTestCase {
         XCTAssertNil(mockKeychainManager.storedPassword)
     }
 
-    // Test: Geçersiz email formatı ile giriş
     func testLogin_InvalidEmail() {
         // Given
         let email = "invalid-email"
         let password = "Password123"
 
-        // When: login fonksiyonu çağrılır
+        // When
         viewModel.login(email: email, password: password)
 
-        // Then: loginDidFail çağrılmalıdır
+        // Then
         XCTAssertTrue(mockDelegate.loginDidFailCalled)
         XCTAssertEqual(mockDelegate.loginError, .invalidEmail)
 
-        // Keychain'e kaydedilmemiş olmalı
         XCTAssertFalse(mockKeychainManager.saveCredentialsCalled)
         XCTAssertNil(mockKeychainManager.storedEmail)
         XCTAssertNil(mockKeychainManager.storedPassword)
     }
 
-    // Test: Geçersiz şifre ile giriş
     func testLogin_InvalidPassword() {
         // Given
         let email = "test@example.com"
         let password = "123"
 
-        // When: login fonksiyonu çağrılır
+        // When
         viewModel.login(email: email, password: password)
 
-        // Then: loginDidFail çağrılmalıdır
+        // Then
         XCTAssertTrue(mockDelegate.loginDidFailCalled)
         XCTAssertEqual(mockDelegate.loginError, .invalidPassword)
 
-        // Keychain'e kaydedilmemiş olmalı
         XCTAssertFalse(mockKeychainManager.saveCredentialsCalled)
         XCTAssertNil(mockKeychainManager.storedEmail)
         XCTAssertNil(mockKeychainManager.storedPassword)
     }
 
-    // Test: Başarılı giriş
     func testLogin_Successful() {
         // Given
         let email = "test@example.com"
         let password = "Password123"
 
-        // When: login fonksiyonu çağrılır
+        // When
         viewModel.login(email: email, password: password)
 
-        // Then: loginDidSucceed çağrılmalıdır
+        // Then
         XCTAssertTrue(mockDelegate.loginDidSucceedCalled)
 
-        // Keychain'e kaydedilmelidir
         XCTAssertTrue(mockKeychainManager.saveCredentialsCalled)
         XCTAssertEqual(mockKeychainManager.storedEmail, email)
         XCTAssertEqual(mockKeychainManager.storedPassword, password)
