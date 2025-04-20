@@ -15,7 +15,6 @@ protocol UserDefaultsProtocol {
     func clearAllItems()
 }
 
-
 final class UserDefaultsManager: UserDefaultsProtocol {
     private let cartKey = "cartItems"
 

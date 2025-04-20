@@ -10,21 +10,23 @@ import SnapKit
 
 final class EmptyFavoriteView: UIView {
 
-    private let imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = Images.heartSlash
         imageView.tintColor = .systemGray3
         imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
-    private let messageLabel: UILabel = {
+    private lazy var messageLabel: UILabel = {
         let label = UILabel()
         label.text = AppString.emptyFavoriteList.localized
         label.textAlignment = .center
         label.textColor = .systemGray
         label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 

@@ -8,7 +8,7 @@
 import UIKit
 
 final class CollectionCardViewCell: UICollectionViewCell {
-    private let cardView: UIView = {
+    private lazy var cardView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
         view.backgroundColor = .lightGray.withAlphaComponent(0.1)
@@ -20,7 +20,7 @@ final class CollectionCardViewCell: UICollectionViewCell {
         return view
     }()
 
-    private let itemImageView: UIImageView = {
+    private lazy var itemImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -30,7 +30,7 @@ final class CollectionCardViewCell: UICollectionViewCell {
         return imageView
     }()
 
-    private let favoriteButton: UIButton = {
+    private lazy var favoriteButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 18
         button.layer.masksToBounds = true
@@ -42,7 +42,7 @@ final class CollectionCardViewCell: UICollectionViewCell {
         return button
     }()
 
-    private let itemNameLabel: UILabel = {
+    private lazy var itemNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.textAlignment = .center
@@ -51,7 +51,7 @@ final class CollectionCardViewCell: UICollectionViewCell {
         return label
     }()
 
-    private let priceLabel: UILabel = {
+    private lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textAlignment = .center

@@ -87,7 +87,7 @@ extension TableCardViewCell {
     private func setupUI() {
         self.selectedBackgroundView = UIView()
         self.selectionStyle = .none
-        
+
         contentView.addSubview(cardView)
         cardView.addSubview(itemImageView)
         cardView.addSubview(itemNameLabel)
@@ -142,7 +142,6 @@ extension TableCardViewCell {
                 }
             }
         }
-
 
         updateFavoriteButton()
 

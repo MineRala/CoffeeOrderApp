@@ -9,19 +9,20 @@ import UIKit
 import SnapKit
 
 final class BannerView: UIView, UIScrollViewDelegate {
-
-    private let bannerScrollView: UIScrollView = {
+    private lazy var bannerScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
 
-    private let bannerPageControl: UIPageControl = {
+    private lazy var bannerPageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = .lightGray
         pageControl.currentPageIndicatorTintColor = .systemPurple
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
         return pageControl
     }()
 

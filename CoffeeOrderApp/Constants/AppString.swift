@@ -56,18 +56,4 @@ enum AppString {
     static let decrease = "-"
     static let increase = "+"
     static let one = "1"
-
-//    // AppError
-//
-//    static let invalidKeyword = "invalidKeyword"
-//    static let invalidEmail = "invalidEmail"
-//    static let emptyEmail = "emptyEmail"
-//    static let invalidPassword = "invalidPassword"
-//    static let emptyPassword = "emptyPassword"
-//    static let unableToComplete = "unableToComplete"
-//    static let invalidResponse = "invalidResponse"
-//    static let invalidData = "invalidData"
-//    static let invalidURLLink = "invalidURLLink"
-//    static let invalidURL = "invalidURL"
-//    static let checkingError = "checkingError"
 }

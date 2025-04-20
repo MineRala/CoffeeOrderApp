@@ -83,7 +83,6 @@ final class CustomAlertView: UIView {
             make.left.right.equalTo(alertContainer).inset(20)
         }
 
-        // Yes Button (Evet butonu sağda olacak)
         yesButton.snp.makeConstraints { make in
             make.bottom.equalTo(alertContainer).offset(-20)
             make.right.equalTo(alertContainer).offset(-20)
@@ -91,7 +90,6 @@ final class CustomAlertView: UIView {
             make.height.equalTo(40)
         }
 
-        // No Button (Hayır butonu solda olacak)
         noButton.snp.makeConstraints { make in
             make.bottom.equalTo(alertContainer).offset(-20)
             make.left.equalTo(alertContainer).offset(20)

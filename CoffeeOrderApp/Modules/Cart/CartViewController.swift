@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 final class CartViewController: UIViewController {
-
     // MARK: - UI Elements
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -34,6 +33,7 @@ final class CartViewController: UIViewController {
         view.backgroundColor = .systemPurple.withAlphaComponent(0.7)
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -233,6 +233,4 @@ extension CartViewController: CartViewModelDelegate {
     func setTotalPriceLabel(with text: String) {
         totalPriceLabel.text = text
     }
-
-
 }

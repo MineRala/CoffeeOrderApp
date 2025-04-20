@@ -9,13 +9,14 @@ import UIKit
 
 final class OrderSuccessView: UIView {
 
-    private let label: UILabel = {
+    private lazy var label: UILabel = {
         let label = UILabel()
-        label.text = "\(AppString.successOrder.localized)✅"
+        label.text = "\(AppString.successOrder.localized) ✅"
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 

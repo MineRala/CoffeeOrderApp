@@ -13,6 +13,7 @@ final class HomeViewController: UIViewController {
     // MARK:  Properties
     private lazy var bannerView: BannerView = {
         let bannerView = BannerView(images: viewModel.bannerImages)
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
         return bannerView
     }()
 
@@ -22,6 +23,7 @@ final class HomeViewController: UIViewController {
         stackView.spacing = 10
         stackView.alignment = .center
         stackView.distribution = .fillProportionally
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
@@ -164,7 +166,6 @@ extension HomeViewController {
             button.backgroundColor = .clear
         }
     }
-
 }
 
 // MARK: - Logic
@@ -274,4 +275,3 @@ extension HomeViewController: HomeViewModelDelegate {
          print("Error occurred: \(error.localizedDescription)")
      }
 }
-

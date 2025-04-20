@@ -24,7 +24,6 @@ protocol CartViewModelDelegate: AnyObject {
     func updateVisibiltyState()
     func reloadData()
     func setTotalPriceLabel(with text: String)
-
 }
 
 final class CartViewModel {

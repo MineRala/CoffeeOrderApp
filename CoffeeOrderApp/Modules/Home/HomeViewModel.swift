@@ -31,7 +31,6 @@ protocol HomeViewModelDelegate: AnyObject {
     func didLogoutSuccessfully()
     func didFetchDataSuccessfully()
     func didFailToFetchData(with error: AppError)
-
 }
 
 final class HomeViewModel {
@@ -55,7 +54,6 @@ final class HomeViewModel {
         self.cacheManager = cacheManager
         self.coreDataManager = coreDataManager
     }
-
 }
 
 // MARK: - Private

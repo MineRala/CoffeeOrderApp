@@ -10,7 +10,6 @@ import SnapKit
 
 final class CartTableViewCell: UITableViewCell {
     // MARK: - UI Components
-
     private lazy var containerView: UIView = {
         let view = UIView()
         view.layer.masksToBounds = false
@@ -20,19 +19,22 @@ final class CartTableViewCell: UITableViewCell {
         view.layer.shadowOpacity = 0.1
         view.layer.shadowOffset = CGSize(width: 0, height: 5)
         view.layer.shadowRadius = 5
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private let nameLabel: UILabel = {
+    private lazy var  nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private let priceLabel: UILabel = {
+    private lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -41,6 +43,7 @@ final class CartTableViewCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.text = "1"
         label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -51,6 +54,7 @@ final class CartTableViewCell: UITableViewCell {
         button.layer.cornerRadius = 8
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.addTarget(self, action: #selector(increaseQuantity), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
@@ -61,6 +65,7 @@ final class CartTableViewCell: UITableViewCell {
         button.layer.cornerRadius = 8
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.addTarget(self, action: #selector(decreaseQuantity), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
@@ -73,13 +78,15 @@ final class CartTableViewCell: UITableViewCell {
         stackView.backgroundColor = .lightGray.withAlphaComponent(0.3)
         stackView.layer.cornerRadius = 20
         stackView.clipsToBounds = true
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
-    private let totalPriceLabel: UILabel = {
+    private lazy var totalPriceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .systemPurple
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
