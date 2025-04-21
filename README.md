@@ -17,7 +17,9 @@ MVVM (Model-View-ViewModel) Architecture
 This project is built using the MVVM (Model-View-ViewModel) architecture. MVVM is a design pattern that helps organize code by separating the user interface (View) from the business logic (Model), improving testability and code readability.
 
 Model: Represents the data layer of the application. It handles data structures, API calls, or database operations.
+
 View: The user interface that displays data and captures user interactions.
+
 ViewModel: Acts as a bridge between the Model and the View. It processes data, prepares it for display, and communicates with the View through data binding.
 
 This structure provides a modular and maintainable codebase by clearly separating UI logic from application logic.
